@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- props 속성 정의 -->
+        <!-- <app-header v-bind:프롭스 속성 이름='상위 컴포넌트의 데이터 이름'></app-header> -->
+        <app-header v-bind:propsdata='message'></app-header>
+        <app-content v-bind:propsdata='num'></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var appHeader = {
+            template: '<h1>{{ propsdata }}</h1>',
+            // props 속성 정의 
+            props: ['propsdata']
+        } // 카멜 케이스: 변수 이름을 정하는 방법. 단어가 연결되어있을 때 두번째 단어부터 첫번째 글자만 대문자로 써주는 것. 
+        var appContent = {
+            template: '<div>{{ propsdata }}</div>',
+            props: ['propsdata']
+        }
+
+        new Vue({
+            el: '#app',
+            // 컴포넌트 등록
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent,
+            },
+            data: {
+                message: 'hi',
+                num: 10
+            }
+        })
+        
+        // 컴포넌트 통신
+        // - 뷰 컴포넌트는 각각 고유한 데이터 유효 범위를 갖는다. 
+        // - 즉, 각각의 컴포넌트는 데이터를 각각 관리한다. 
+        // - 데이터를 서로 공유하기 위해서는 props 속성과 event 발생이라는 규칙을 사용. 
+        // -   상위     -- props 전달 -->   하위    (props라는 속성에 데이터를 넣음)
+        //   컴포넌트  <-- 이벤트 발생 -- 컴포넌트
+
+        // 컴포넌트 통신 규칙이 필요한 이유
+        // - 특정 컴포넌트의 변화에 따라서 나머지 컴포넌트가 유기적으로 계속 데이터를 주고 받게 되면, 데이터의 방향을 예측하기 어렵다. 따라서 n방향 통신에서(mvc패턴) 특정 데이터가 바뀌었을 때 그로 인한 버그를 추적하기 어렵다. 
+        // - 데이터의 흐름을 추적할 수 있다. 
+
+        // props 속성의 특징
+        // - reactivity. 상위 컴포넌트에서 바뀐 데이터가 그대로 반영돼서 하위 컴포넌트의 props로 내려옴.       
+    </script>
+</body>
+</html>

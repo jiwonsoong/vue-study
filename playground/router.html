@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <!-- router-link -->
+            <!-- - router에서 페이지 이동을 하기 위한 링크 태그 -->             
+            <!-- - router-link태그는 최종적으로 화면에 anchor태그(a태그)로 변환돼서 나타난다.  -->
+            <!-- router-link*2 -->
+            <router-link to='/login'>Login</router-link>
+            <router-link to='/main'>Main</router-link>
+        </div>
+        <!-- router-view -->
+        <!-- - 페이지 url이 변경됐을 때 url에 따라서 컴포넌트가 뿌려지는 영역  -->
+        <router-view></router-view>
+    </div>
+
+    <!-- vuejs -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+    <!-- router(순서 중요) -->
+    <!-- script:src -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> 
+    <script>
+        var LoginComponent = {
+            template: '<div>login</div>',
+        }
+        var MainComponent = {
+            template: '<div>main</div>',
+        }
+   
+        // 라우터 인스턴스 
+        var router = new VueRouter({
+            // 라우터 옵션
+
+            // 페이지의 라우팅 정보 (어떤 url로 이동했을 때 어떤 페이지가 나올지)
+            routes: [
+                // 로그인 페이지 정보
+                { 
+                    // 페이지의 url
+                    path: '/login',
+                    // 해당 url에서 표시될 컴포넌트 
+                    component: LoginComponent,  
+                },
+                // 메인 페이지 정보
+                {
+                    path: '/main',
+                    component: MainComponent,
+                }
+            ],
+        })
+
+        new Vue({
+            el: '#app', // app이라는 id에다가 인스턴스 정의
+            router: router, // 인스턴스에 라우터 인스턴스 등록. 라우터도 그 범위 안에서 유효 
+        })
+
+
+        // 뷰 라우터
+        // - 싱글 페이지 애플리케이션을 구현하거나 페이지 간에 이동하는 기능을 구현할 때 사용하는 라이브러리
+     
+        // 라우터 옵션
+        // - routes: 페이지의 정보들이 들어가는 속성. 페이지의 url(path), 해당 url로 이동했을 때 뿌려질 컴포넌트(component)(한 개!)
+        // - mode: 'history': url의 해쉬 값 제거 
+    </script>
+</body>
+</html>

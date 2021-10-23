@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <app-header></app-header>
+        <app-content></app-content>
+        <app-footer></app-footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 뷰 컴포넌트
+        // - 화면의 영역을 구분하여 개발할 수 있는 뷰의 기능.
+        // - 재사용성이 핵심. (코드의 반복을 최대한 줄이고 기존의 코드로 최대한 많은 화면을 뽑아낸다.)
+        // - 컴포넌트 간의 관계가 존재. 
+
+        // 컴포넌트 등록 (전역 컴포넌트)
+        // - Vue.component('컴포넌트 이름', 컴포넌트 내용);
+        Vue.component('app-header', {
+            template: '<h1>Header</h1>' // template: 컴포넌트가 표현되는 마크업이나 스타일
+        }); 
+        Vue.component('app-content', {
+            template: '<div>content</div>'
+        })
+
+        // 인스턴스 생성
+        // - 인스턴스를 생성하면 개발자 도구에서 Root 컴포넌트로 인식. 
+        new Vue({
+            el: '#app', // 인스턴스를 생성해서 해당 태그에 붙이겠다고 정의하는 것. #은 css선택자.
+            
+            // 지역 컴포넌트 등록
+            components: {
+                // '컴포넌트 이름(키)': '컴포넌트 내용(값)'
+                'app-footer': {
+                    template: '<footer>footer</footer>'
+                }
+            }
+        }); 
+
+        // 전역 컴포넌트와 지역 컴포넌트의 차이점
+        // - 지역 컴포넌트(일반적): 싱글 파일 컴포넌트 체계에서 특정 컴포넌트 하단에 어떤 컴포넌트가 등록됐는지 알 수 있다. 따라서 서비스를 구현할 때는 대부분 components라는 속성을 이용한다. 
+        // - 전역 컴포넌트: 실제 서비스에서 구현할 때는 대부분 플러그인이나 라이브러리 형태로 사용한다. 
+
+        // 컴포넌트와 인스턴스의 관계 
+        // - 전역 컴포넌트는 인스턴스를 생성할 때 마다 따로 등록할 필요가 없음. 인스턴스를 생성하지 않아도 기본적으로 모든 인스턴스에 등록이 되어 있음. 
+        // - 지역 컴포넌트는 인스턴스마다 새로 등록.  
+    </script>
+</body>
+</html>
