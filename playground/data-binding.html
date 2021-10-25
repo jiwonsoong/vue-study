@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- data binding -->
+        <!-- {{ str }} -->
+
+        <!-- 뷰 디렉티브 -->
+        <!-- 클래스 바인딩 -->
+        <p v-bind:id="uuid" v-bind:class="name">{{ num }}</p>
+        <!-- <p id="abc1234">{{ num }}</p> 와 같다. -->
+        <p>{{ doubleNum }}</p>
+
+        <!-- v-if -->
+        <!-- 조건에 따라서 특정 태그의 내용을 보여주느냐 마느냐 -->
+        <div v-if="loading">
+            Loading...
+        </div>
+        <div v-else>
+            test user has been logged in
+        </div>
+
+        <!-- v-show -->
+        <!-- 조건에 따라 보여주느냐 마느냐인데, if는 DOM을 아예 제거하는 것이고, 
+            show는 css style="display: none;"을 사용해서 육안상으로만 안 보이게 하고 DOM의 정보는 남아있는 것. -->
+        <div v-show="loading">
+            Loading...
+        </div>
+
+        <input type="text" v-model="message">
+        <p>Message is: {{ message }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                // str: 'hi',
+                num: 10,
+                uuid: 'abc1234',
+                name: 'text-blue',
+                loading: true,
+                message: '',
+            },
+            computed: { // 데이터의 값에 따라 바뀌는 값을 정의할 때 사용하는 속성.
+                doubleNum: function() {
+                    return this.num * 2;
+                }
+            }
+        })
+
+        // 뷰의 템플릿 문법
+        // - 뷰로 화면을 조작하는 방법.
+        // - 크게 데이터 바인딩과 디렉티브로 나뉜다.
+
+        // 데이터 바인딩 
+        // - 뷰 인스턴스에서 정의한 속성들(data, computed, ...)을 화면에 표시하는 방법.
+        // - 콧수염 괄호(Mustache Tag)를 이용.
+
+        // 디렉티브
+        // - 뷰로 화면의 요소를 더 쉽게 조작하기 위한 방법.
+        // - html태그에서 일반적인 id나 class와 같은 표준 속성을 제외한, 'v-'가 붙는 속성들.
+    </script>
+</body>
+</html>
