@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>computed 속성을 이용한 클래스 코드 작성 방법</title>
+    <style>
+        .warning {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <!-- way 1 -->
+        <!-- <p v-bind:class="{ warning: isError }">Hello</p> -->
+        <!-- class에 여러 조건들을 넣을 수 있음! 
+        isError의 boolean값에 따라 class name을 넣거나 안넣거나 할 수 있음.
+        { 클래스이름: 조건 } 
+        => isError가 true일 때는 warning이 class이름으로 들어가고 false일 때는 들어가지 않음. -->
+
+        <!-- way 2 -->
+        <p v-bind:class="errorTextColor">Hello</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // computed를 이용한 직관적인 코드 작성 방법과 클래스 바인딩에 computed를 어떻게 적용할 수 있는지. 
+        new Vue({
+            el: "#app",
+            data: {
+                isError: false
+            },
+            computed: {
+                errorTextColor: function() {
+                    return this.isError ? 'warning' : null;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

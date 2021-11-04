@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>watch속성</title>
+    <title>watch속성vs.computed속성</title>
 </head>
 <body>
     <div id="app">
-        {{ num }}
-        <button v-on:click="addNum">increase</button>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -19,19 +18,20 @@
             data: {
                 num: 10
             },
-            // watch
-            // - 데이터를 대상으로 열 수 있고, 데이터의 변화에 따라 특정 로직을 실행할 수 있는 vue의 속성
-            watch: {
-                num: function() {
-                    this.logText();
+            computed: {
+                doubleNum: function() {
+                    return this.num * 2;
                 }
-            }, 
+            },
+            watch: {
+                num: function(newValue, oldValue) {
+                    this.fetchUserByNumber(newValue);
+                }
+            },
             methods: {
-                addNum: function() {
-                    this.num++;
-                },
-                logText: function() {
-                    console.log('changed');
+                fetchUserByNumber: function(num) {
+                    console.log(num);
+                    // axios.get(num);
                 }
             }
         })
