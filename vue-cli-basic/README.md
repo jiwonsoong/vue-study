@@ -1,5 +1,8 @@
 # vue-cli
 
+### Overview
+main.js, App.vue, a.vue, HelloWorld.vue 공부
+
 ## Project setup
 ```
 npm install
@@ -22,3 +25,4 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
